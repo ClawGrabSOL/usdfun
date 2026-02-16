@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usd.fun | Launch Tokens with USDC</title>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --green: #00D395;
+            --green-light: #33DDAA;
+            --green-dark: #00B380;
+            --usdc-blue: #2775CA;
+            --black: #0A0A0A;
+            --gray-900: #111111;
+            --gray-800: #1A1A1A;
+            --gray-700: #2A2A2A;
+            --gray-400: #888888;
+            --gray-300: #AAAAAA;
+            --white: #FFFFFF;
+            --success: #22C55E;
+            --red: #EF4444;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 600px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 211, 149, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .connect-btn {
+            background: var(--green);
+            color: var(--black);
+            border: none;
+            padding: 12px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .connect-btn:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 211, 149, 0.3);
+        }
+
+        .connect-btn.connected {
+            background: var(--gray-800);
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            max-width: 550px;
+            margin: 0 auto 40px;
+        }
+
+        .usdc-box {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            border: 1px solid var(--gray-700);
+            border-radius: 16px;
+            padding: 24px 32px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .usdc-box h3 {
+            color: var(--green);
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .usdc-box h3 img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .usdc-box p {
+            color: var(--gray-300);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .features { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .feature {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .feature:hover {
+            border-color: var(--green);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .feature h3 {
+            color: var(--white);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        .form-section {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: 24px;
+            padding: 32px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            color: var(--green);
+        }
+
+        .section-header .badge {
+            background: var(--usdc-blue);
+            color: var(--white);
+            font-size: 0.625rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 12px;
+            color: var(--white);
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(0, 211, 149, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--gray-400);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .image-upload {
+            border: 2px dashed var(--gray-700);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--gray-800);
+        }
+
+        .image-upload:hover {
+            border-color: var(--green);
+            background: rgba(0, 211, 149, 0.05);
+        }
+
+        .image-upload.has-image {
+            padding: 0;
+            border-style: solid;
+            overflow: hidden;
+        }
+
+        .image-upload input { display: none; }
+
+        .image-upload .upload-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-700);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.5rem;
+        }
+
+        .image-upload .upload-text {
+            color: var(--white);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .image-upload .upload-hint {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+        }
+
+        .image-upload img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .preview-section {
+            position: sticky;
+            top: 24px;
+        }
+
+        .preview-card {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            border: 1px solid var(--gray-700);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--gray-600);
+        }
+
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-content {
+            padding: 24px;
+        }
+
+        .preview-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .preview-symbol {
+            color: var(--green);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .preview-desc {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .preview-stat {
+            background: var(--black);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .preview-stat .value {
+            color: var(--green);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .preview-stat .label {
+            color: var(--gray-400);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .launch-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+            color: var(--black);
+            border: none;
+            padding: 18px 32px;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .launch-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 211, 149, 0.4);
+        }
+
+        .launch-btn:disabled {
+            background: var(--gray-700);
+            color: var(--gray-400);
+            cursor: not-allowed;
+        }
+
+        .cost-info {
+            background: rgba(0, 211, 149, 0.1);
+            border: 1px solid rgba(0, 211, 149, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .cost-info .cost {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .cost-info .cost-label {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .status {
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-size: 0.875rem;
+        }
+
+        .status.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--red);
+            color: var(--red);
+        }
+
+        .status.loading {
+            background: rgba(0, 211, 149, 0.1);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .live-section {
+            padding: 60px 0;
+        }
+
+        .live-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .live-header h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+        }
+
+        .launches-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .launch-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+
+        .launch-card:hover {
+            border-color: var(--green);
+            transform: translateX(4px);
+        }
+
+        .launch-card-image {
+            width: 56px;
+            height: 56px;
+            background: var(--gray-800);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .launch-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .launch-card-info {
+            flex: 1;
+        }
+
+        .launch-card-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .launch-card-symbol {
+            color: var(--green);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+        }
+
+        .launch-card-stats {
+            text-align: right;
+        }
+
+        .launch-card-mcap {
+            color: var(--success);
+            font-family: 'Space Mono', monospace;
+            font-weight: 600;
+        }
+
+        .launch-card-holders {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+        }
+
+        .no-launches {
+            background: var(--gray-900);
+            border: 1px dashed var(--gray-700);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        footer {
+            border-top: 1px solid var(--gray-800);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal h3 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 1.25rem;
+        }
+
+        .wallet-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .wallet-option:hover {
+            border-color: var(--green);
+            background: var(--gray-700);
+        }
+
+        .wallet-option img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .wallet-option span {
+            font-weight: 500;
+        }
+
+        .modal-close {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--gray-700);
+            color: var(--gray-400);
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 12px;
+        }
+
+        .modal-close:hover {
+            border-color: var(--gray-400);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="/logo.png" alt="usd.fun">
+                USD.FUN
+            </div>
+            <button class="connect-btn" id="connectBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Connect Wallet
+            </button>
+        </header>
+
+        <section class="hero">
+            <h1>Launch Tokens<br>With USDC</h1>
+            <p>No more SOL price volatility. Pay in stablecoins. Launch instantly. Keep it simple.</p>
+            
+            <div class="usdc-box">
+                <h3>
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="#2775CA"/>
+                        <path d="M20.5 18.5c0-2-1.2-2.7-3.6-3-.6-.1-1.2-.2-1.7-.4-1.7-.4-2.2-.9-2.2-1.8s.7-1.5 2.1-1.5c1.2 0 1.9.4 2.2 1.4.1.2.2.3.4.3h1c.2 0 .4-.2.3-.4-.3-1.4-1.3-2.5-2.9-2.8V9c0-.2-.2-.4-.4-.4h-1c-.2 0-.4.2-.4.4v1.3c-1.9.3-3.1 1.5-3.1 3.1 0 2 1.2 2.7 3.6 3 .5.1 1.1.2 1.6.3 1.5.4 2.1.9 2.1 1.9s-.9 1.7-2.3 1.7c-1.6 0-2.2-.7-2.5-1.6 0-.2-.2-.3-.4-.3h-1c-.2 0-.4.2-.3.4.4 1.7 1.5 2.6 3.2 2.9V23c0 .2.2.4.4.4h1c.2 0 .4-.2.4-.4v-1.3c2-.3 3.3-1.5 3.3-3.2z" fill="white"/>
+                    </svg>
+                    Pay With USDC
+                </h3>
+                <p>Tired of SOL volatility eating into your launch? usd.fun lets you launch tokens by paying in USDC — stable, predictable, no surprises. Your launch cost stays the same whether SOL is at $20 or $200.</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">💵</div>
+                <h3>USDC Payments</h3>
+                <p>Launch with stablecoins. No SOL price risk.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Launch</h3>
+                <p>Token live in seconds. No waiting.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h3>Bonding Curve</h3>
+                <p>Fair launch with built-in price discovery.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Fixed Supply</h3>
+                <p>1B tokens. Mint burned. No inflation.</p>
+            </div>
+        </section>
+
+        <div class="main-grid">
+            <div class="form-section">
+                <div class="section-header">
+                    <h2>// CREATE TOKEN</h2>
+                    <span class="badge">USDC</span>
+                </div>
+
+                <form id="launchForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Token Name</label>
+                            <input type="text" id="tokenName" placeholder="My Token" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Symbol</label>
+                            <input type="text" id="tokenSymbol" placeholder="TOKEN" maxlength="10" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="tokenDesc" placeholder="What's your token about?"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Token Image</label>
+                            <div class="image-upload" id="imageUpload">
+                                <input type="file" id="tokenImage" accept="image/*">
+                                <div class="upload-icon">🖼️</div>
+                                <div class="upload-text">Upload Image</div>
+                                <div class="upload-hint">PNG, JPG, GIF up to 5MB</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Initial Buy (USDC)</label>
+                            <input type="number" id="initialBuy" placeholder="10" step="1" min="0">
+                            <div style="color: var(--gray-400); font-size: 0.75rem; margin-top: 8px;">
+                                Optional: Buy tokens at launch
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Twitter</label>
+                            <input type="text" id="tokenTwitter" placeholder="@yourtoken">
+                        </div>
+                        <div class="form-group">
+                            <label>Website</label>
+                            <input type="text" id="tokenWebsite" placeholder="https://yourtoken.com">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="cost-info">
+                    <div class="cost">$5 USDC</div>
+                    <div class="cost-label">Launch Cost (fixed, no SOL needed)</div>
+                </div>
+
+                <button class="launch-btn" id="launchBtn" disabled>Connect Wallet to Launch</button>
+                <div id="statusMsg"></div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-card">
+                    <div class="preview-image" id="previewImage">🪙</div>
+                    <div class="preview-content">
+                        <h3 id="previewName">Your Token</h3>
+                        <div class="preview-symbol" id="previewSymbol">$SYMBOL</div>
+                        <p class="preview-desc" id="previewDesc">Token description will appear here...</p>
+                        <div class="preview-stats">
+                            <div class="preview-stat">
+                                <div class="value">1B</div>
+                                <div class="label">Supply</div>
+                            </div>
+                            <div class="preview-stat">
+                                <div class="value">USDC</div>
+                                <div class="label">Payment</div>
+                            </div>
+                            <div class="preview-stat">
+                                <div class="value">$5</div>
+                                <div class="label">Cost</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="live-section">
+            <div class="live-header">
+                <h2><span class="live-dot"></span> Live Launches</h2>
+            </div>
+            <div class="launches-grid" id="launchesGrid">
+                <div class="no-launches">No tokens launched yet. Be the first! 🚀</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Built on Solana. Powered by USDC.</p>
+            <div class="footer-links">
+                <a href="https://github.com/ClawGrabSOL" target="_blank">GitHub</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="walletModal">
+        <div class="modal">
+            <h3>Connect Wallet</h3>
+            <div class="wallet-option" data-wallet="phantom">
+                <img src="https://phantom.app/img/phantom-icon-purple.svg" alt="Phantom">
+                <span>Phantom</span>
+            </div>
+            <div class="wallet-option" data-wallet="solflare">
+                <img src="https://solflare.com/favicon.ico" alt="Solflare">
+                <span>Solflare</span>
+            </div>
+            <div class="wallet-option" data-wallet="backpack">
+                <img src="https://backpack.app/favicon.ico" alt="Backpack">
+                <span>Backpack</span>
+            </div>
+            <button class="modal-close" id="modalClose">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        let walletAddress = null;
+        let walletProvider = null;
+        let imageData = null;
+
+        const connectBtn = document.getElementById('connectBtn');
+        const launchBtn = document.getElementById('launchBtn');
+        const walletModal = document.getElementById('walletModal');
+        const modalClose = document.getElementById('modalClose');
+        const imageUpload = document.getElementById('imageUpload');
+        const tokenImage = document.getElementById('tokenImage');
+        const statusMsg = document.getElementById('statusMsg');
+
+        const tokenName = document.getElementById('tokenName');
+        const tokenSymbol = document.getElementById('tokenSymbol');
+        const tokenDesc = document.getElementById('tokenDesc');
+
+        const previewName = document.getElementById('previewName');
+        const previewSymbol = document.getElementById('previewSymbol');
+        const previewDesc = document.getElementById('previewDesc');
+        const previewImage = document.getElementById('previewImage');
+
+        const getProvider = (wallet) => {
+            if (wallet === 'phantom' && window.solana?.isPhantom) return window.solana;
+            if (wallet === 'solflare' && window.solflare) return window.solflare;
+            if (wallet === 'backpack' && window.backpack) return window.backpack;
+            return null;
+        };
+
+        connectBtn.addEventListener('click', () => {
+            if (walletAddress) {
+                if (walletProvider?.disconnect) walletProvider.disconnect();
+                walletAddress = null;
+                walletProvider = null;
+                connectBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Connect Wallet`;
+                connectBtn.classList.remove('connected');
+                launchBtn.disabled = true;
+                launchBtn.textContent = 'Connect Wallet to Launch';
+            } else {
+                walletModal.classList.add('show');
+            }
+        });
+
+        modalClose.addEventListener('click', () => walletModal.classList.remove('show'));
+        walletModal.addEventListener('click', (e) => {
+            if (e.target === walletModal) walletModal.classList.remove('show');
+        });
+
+        document.querySelectorAll('.wallet-option').forEach(opt => {
+            opt.addEventListener('click', async () => {
+                const wallet = opt.dataset.wallet;
+                const provider = getProvider(wallet);
+                
+                if (!provider) {
+                    const urls = {
+                        phantom: 'https://phantom.app/',
+                        solflare: 'https://solflare.com/',
+                        backpack: 'https://backpack.app/'
+                    };
+                    window.open(urls[wallet], '_blank');
+                    return;
+                }
+
+                try {
+                    walletModal.classList.remove('show');
+                    showStatus('Connecting...', 'loading');
+                    
+                    const resp = await provider.connect();
+                    walletProvider = provider;
+                    walletAddress = resp.publicKey.toString();
+                    
+                    const short = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
+                    connectBtn.innerHTML = short;
+                    connectBtn.classList.add('connected');
+                    
+                    launchBtn.disabled = false;
+                    launchBtn.textContent = 'Launch Token 🚀';
+                    
+                    showStatus('Wallet connected!', 'success');
+                    setTimeout(() => statusMsg.innerHTML = '', 2000);
+                } catch (err) {
+                    showStatus('Connection failed: ' + err.message, 'error');
+                }
+            });
+        });
+
+        imageUpload.addEventListener('click', () => tokenImage.click());
+        
+        tokenImage.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                showStatus('Image must be under 5MB', 'error');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                imageData = evt.target.result;
+                imageUpload.innerHTML = `<img src="${imageData}" alt="Token">`;
+                imageUpload.classList.add('has-image');
+                previewImage.innerHTML = `<img src="${imageData}" alt="Preview">`;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        tokenName.addEventListener('input', e => {
+            previewName.textContent = e.target.value || 'Your Token';
+        });
+        
+        tokenSymbol.addEventListener('input', e => {
+            const val = e.target.value.toUpperCase();
+            e.target.value = val;
+            previewSymbol.textContent = val ? `$${val}` : '$SYMBOL';
+        });
+        
+        tokenDesc.addEventListener('input', e => {
+            previewDesc.textContent = e.target.value || 'Token description will appear here...';
+        });
+
+        launchBtn.addEventListener('click', async () => {
+            if (!walletAddress) return showStatus('Connect wallet first', 'error');
+
+            const name = tokenName.value.trim();
+            const symbol = tokenSymbol.value.trim();
+            
+            if (!name || !symbol) return showStatus('Name and symbol required', 'error');
+
+            try {
+                launchBtn.disabled = true;
+                launchBtn.textContent = 'Creating...';
+                showStatus('Creating your token with USDC...', 'loading');
+
+                const res = await fetch('/api/launch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        symbol,
+                        description: tokenDesc.value.trim(),
+                        image: imageData,
+                        twitter: document.getElementById('tokenTwitter').value.trim(),
+                        website: document.getElementById('tokenWebsite').value.trim(),
+                        creator: walletAddress,
+                        initialBuy: parseFloat(document.getElementById('initialBuy').value) || 0,
+                        paymentToken: 'USDC'
+                    })
+                });
+
+                const data = await res.json();
+                
+                if (!res.ok) throw new Error(data.error);
+
+                showStatus(`🎉 Token launched! Mint: ${data.mint}`, 'success');
+                launchBtn.textContent = 'Launch Another 🚀';
+                launchBtn.disabled = false;
+                fetchLaunches();
+
+            } catch (err) {
+                showStatus(err.message, 'error');
+                launchBtn.textContent = 'Launch Token 🚀';
+                launchBtn.disabled = false;
+            }
+        });
+
+        function showStatus(msg, type) {
+            statusMsg.className = 'status ' + type;
+            statusMsg.textContent = msg;
+        }
+
+        async function fetchLaunches() {
+            try {
+                const res = await fetch('/api/launches');
+                const launches = await res.json();
+                const grid = document.getElementById('launchesGrid');
+                
+                if (!launches.length) {
+                    grid.innerHTML = '<div class="no-launches">No tokens launched yet. Be the first! 🚀</div>';
+                    return;
+                }
+
+                grid.innerHTML = launches.map(l => `
+                    <div class="launch-card">
+                        <div class="launch-card-image">
+                            ${l.image ? `<img src="${l.image}" alt="${l.name}">` : '🪙'}
+                        </div>
+                        <div class="launch-card-info">
+                            <div class="launch-card-name">${l.name}</div>
+                            <div class="launch-card-symbol">$${l.symbol}</div>
+                        </div>
+                        <div class="launch-card-stats">
+                            <div class="launch-card-mcap">${l.marketCap}</div>
+                            <div class="launch-card-holders">${l.holders} holders</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {}
+        }
+
+        window.addEventListener('load', async () => {
+            if (window.solana?.isPhantom) {
+                try {
+                    const resp = await window.solana.connect({ onlyIfTrusted: true });
+                    walletProvider = window.solana;
+                    walletAddress = resp.publicKey.toString();
+                    const short = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
+                    connectBtn.innerHTML = short;
+                    connectBtn.classList.add('connected');
+                    launchBtn.disabled = false;
+                    launchBtn.textContent = 'Launch Token 🚀';
+                } catch (e) {}
+            }
+            fetchLaunches();
+        });
+
+        setInterval(fetchLaunches, 15000);
+    </script>
+</body>
+</html>
