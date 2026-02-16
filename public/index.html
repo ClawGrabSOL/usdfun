@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token22 Launchpad | The Way Toly Intended</title>
-    <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    <title>usd.fun | Launch Tokens with USDC</title>
+    <link rel="icon" type="image/png" href="/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --yellow: #FACC15;
-            --yellow-light: #FDE047;
-            --yellow-dark: #EAB308;
+            --green: #00D395;
+            --green-light: #33DDAA;
+            --green-dark: #00B380;
+            --usdc-blue: #2775CA;
             --black: #0A0A0A;
-            --gray-900: #171717;
-            --gray-800: #262626;
-            --gray-700: #404040;
-            --gray-400: #A3A3A3;
-            --gray-300: #D4D4D4;
-            --white: #FAFAFA;
-            --green: #22C55E;
+            --gray-900: #111111;
+            --gray-800: #1A1A1A;
+            --gray-700: #2A2A2A;
+            --gray-400: #888888;
+            --gray-300: #AAAAAA;
+            --white: #FFFFFF;
+            --success: #22C55E;
             --red: #EF4444;
         }
 
@@ -33,14 +34,13 @@
             overflow-x: hidden;
         }
 
-        /* Gradient background */
         .bg-gradient {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: 600px;
-            background: radial-gradient(ellipse at 50% 0%, rgba(250, 204, 21, 0.15) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 211, 149, 0.12) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
@@ -53,7 +53,6 @@
             z-index: 1;
         }
 
-        /* Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -66,25 +65,20 @@
             font-family: 'Space Mono', monospace;
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--yellow);
+            color: var(--green);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--yellow);
+        .logo img {
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
         }
 
         .connect-btn {
-            background: var(--yellow);
+            background: var(--green);
             color: var(--black);
             border: none;
             padding: 12px 24px;
@@ -100,22 +94,17 @@
         }
 
         .connect-btn:hover {
-            background: var(--yellow-light);
+            background: var(--green-light);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(250, 204, 21, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 211, 149, 0.3);
         }
 
         .connect-btn.connected {
             background: var(--gray-800);
-            color: var(--yellow);
-            border: 1px solid var(--yellow);
+            color: var(--green);
+            border: 1px solid var(--green);
         }
 
-        .connect-btn.connected:hover {
-            background: var(--gray-700);
-        }
-
-        /* Hero */
         .hero {
             text-align: center;
             padding: 80px 0 60px;
@@ -126,7 +115,7 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--white) 0%, var(--yellow) 100%);
+            background: linear-gradient(135deg, var(--white) 0%, var(--green) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -135,72 +124,41 @@
         .hero p {
             font-size: 1.25rem;
             color: var(--gray-400);
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto 40px;
         }
 
-        .toly-quote {
+        .usdc-box {
             background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
             border: 1px solid var(--gray-700);
             border-radius: 16px;
             padding: 24px 32px;
             max-width: 700px;
             margin: 0 auto;
-            text-align: left;
-            position: relative;
+            text-align: center;
         }
 
-        .toly-quote::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 24px;
-            font-size: 4rem;
-            color: var(--yellow);
-            opacity: 0.3;
-            font-family: Georgia, serif;
-        }
-
-        .toly-quote p {
-            color: var(--gray-300);
-            font-size: 1rem;
-            font-style: italic;
-            margin-bottom: 16px;
-            line-height: 1.7;
-        }
-
-        .toly-quote .author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .toly-quote .author-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+        .usdc-box h3 {
+            color: var(--green);
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            color: var(--black);
+            gap: 10px;
         }
 
-        .toly-quote .author-info {
-            font-size: 0.875rem;
+        .usdc-box h3 img {
+            width: 28px;
+            height: 28px;
         }
 
-        .toly-quote .author-name {
-            color: var(--white);
-            font-weight: 600;
+        .usdc-box p {
+            color: var(--gray-300);
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        .toly-quote .author-title {
-            color: var(--gray-400);
-        }
-
-        /* Features */
         .features {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -222,7 +180,7 @@
         }
 
         .feature:hover {
-            border-color: var(--yellow);
+            border-color: var(--green);
             transform: translateY(-4px);
         }
 
@@ -244,7 +202,6 @@
             line-height: 1.5;
         }
 
-        /* Main Grid */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 400px;
@@ -256,7 +213,6 @@
             .main-grid { grid-template-columns: 1fr; }
         }
 
-        /* Form Section */
         .form-section {
             background: var(--gray-900);
             border: 1px solid var(--gray-800);
@@ -274,12 +230,12 @@
         .section-header h2 {
             font-family: 'Space Mono', monospace;
             font-size: 1rem;
-            color: var(--yellow);
+            color: var(--green);
         }
 
         .section-header .badge {
-            background: var(--yellow);
-            color: var(--black);
+            background: var(--usdc-blue);
+            color: var(--white);
             font-size: 0.625rem;
             font-weight: 700;
             padding: 4px 8px;
@@ -297,8 +253,6 @@
         .form-group {
             margin-bottom: 16px;
         }
-
-        .form-group.full { grid-column: 1 / -1; }
 
         .form-group label {
             display: block;
@@ -326,8 +280,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--yellow);
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(0, 211, 149, 0.1);
         }
 
         .form-group input::placeholder,
@@ -340,7 +294,6 @@
             min-height: 80px;
         }
 
-        /* Image Upload */
         .image-upload {
             border: 2px dashed var(--gray-700);
             border-radius: 16px;
@@ -352,8 +305,8 @@
         }
 
         .image-upload:hover {
-            border-color: var(--yellow);
-            background: rgba(250, 204, 21, 0.05);
+            border-color: var(--green);
+            background: rgba(0, 211, 149, 0.05);
         }
 
         .image-upload.has-image {
@@ -393,7 +346,6 @@
             object-fit: cover;
         }
 
-        /* Preview Card */
         .preview-section {
             position: sticky;
             top: 24px;
@@ -434,7 +386,7 @@
         }
 
         .preview-symbol {
-            color: var(--yellow);
+            color: var(--green);
             font-family: 'Space Mono', monospace;
             font-size: 1rem;
             margin-bottom: 12px;
@@ -461,7 +413,7 @@
         }
 
         .preview-stat .value {
-            color: var(--yellow);
+            color: var(--green);
             font-family: 'Space Mono', monospace;
             font-weight: 700;
             font-size: 0.875rem;
@@ -474,10 +426,9 @@
             margin-top: 4px;
         }
 
-        /* Launch Button */
         .launch-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
             color: var(--black);
             border: none;
             padding: 18px 32px;
@@ -494,18 +445,37 @@
 
         .launch-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(250, 204, 21, 0.4);
+            box-shadow: 0 12px 32px rgba(0, 211, 149, 0.4);
         }
 
         .launch-btn:disabled {
             background: var(--gray-700);
             color: var(--gray-400);
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
-        /* Status */
+        .cost-info {
+            background: rgba(0, 211, 149, 0.1);
+            border: 1px solid rgba(0, 211, 149, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .cost-info .cost {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .cost-info .cost-label {
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
         .status {
             text-align: center;
             padding: 16px;
@@ -516,8 +486,8 @@
 
         .status.success {
             background: rgba(34, 197, 94, 0.1);
-            border: 1px solid var(--green);
-            color: var(--green);
+            border: 1px solid var(--success);
+            color: var(--success);
         }
 
         .status.error {
@@ -527,12 +497,11 @@
         }
 
         .status.loading {
-            background: rgba(250, 204, 21, 0.1);
-            border: 1px solid var(--yellow);
-            color: var(--yellow);
+            background: rgba(0, 211, 149, 0.1);
+            border: 1px solid var(--green);
+            color: var(--green);
         }
 
-        /* Live Launches */
         .live-section {
             padding: 60px 0;
         }
@@ -555,7 +524,7 @@
         .live-dot {
             width: 8px;
             height: 8px;
-            background: var(--green);
+            background: var(--success);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -582,7 +551,7 @@
         }
 
         .launch-card:hover {
-            border-color: var(--yellow);
+            border-color: var(--green);
             transform: translateX(4px);
         }
 
@@ -615,7 +584,7 @@
         }
 
         .launch-card-symbol {
-            color: var(--yellow);
+            color: var(--green);
             font-family: 'Space Mono', monospace;
             font-size: 0.875rem;
         }
@@ -625,7 +594,7 @@
         }
 
         .launch-card-mcap {
-            color: var(--green);
+            color: var(--success);
             font-family: 'Space Mono', monospace;
             font-weight: 600;
         }
@@ -644,7 +613,6 @@
             color: var(--gray-400);
         }
 
-        /* Footer */
         footer {
             border-top: 1px solid var(--gray-800);
             padding: 40px 0;
@@ -657,7 +625,7 @@
         }
 
         footer a {
-            color: var(--yellow);
+            color: var(--green);
             text-decoration: none;
         }
 
@@ -672,7 +640,6 @@
             gap: 24px;
         }
 
-        /* Wallet Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -716,7 +683,7 @@
         }
 
         .wallet-option:hover {
-            border-color: var(--yellow);
+            border-color: var(--green);
             background: var(--gray-700);
         }
 
@@ -754,8 +721,8 @@
     <div class="container">
         <header>
             <div class="logo">
-                <img src="/favicon.jpg" alt="Token22" style="width:36px;height:36px;border-radius:8px;">
-                TOKEN22
+                <img src="/logo.png" alt="usd.fun">
+                USD.FUN
             </div>
             <button class="connect-btn" id="connectBtn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -767,31 +734,31 @@
         </header>
 
         <section class="hero">
-            <h1>Launch Tokens<br>The Way Toly Intended</h1>
-            <p>Token22 extensions. Built-in transfer fees. Permanent on-chain metadata. Fair launches.</p>
+            <h1>Launch Tokens<br>With USDC</h1>
+            <p>No more SOL price volatility. Pay in stablecoins. Launch instantly. Keep it simple.</p>
             
-            <div class="toly-quote">
-                <p>Token extensions are going to change everything. Transfer fees that actually work, metadata on-chain, hooks that execute atomically. This is what tokens should have been from day one.</p>
-                <div class="author">
-                    <div class="author-avatar">AY</div>
-                    <div class="author-info">
-                        <div class="author-name">Anatoly Yakovenko</div>
-                        <div class="author-title">Co-founder, Solana</div>
-                    </div>
-                </div>
+            <div class="usdc-box">
+                <h3>
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="#2775CA"/>
+                        <path d="M20.5 18.5c0-2-1.2-2.7-3.6-3-.6-.1-1.2-.2-1.7-.4-1.7-.4-2.2-.9-2.2-1.8s.7-1.5 2.1-1.5c1.2 0 1.9.4 2.2 1.4.1.2.2.3.4.3h1c.2 0 .4-.2.3-.4-.3-1.4-1.3-2.5-2.9-2.8V9c0-.2-.2-.4-.4-.4h-1c-.2 0-.4.2-.4.4v1.3c-1.9.3-3.1 1.5-3.1 3.1 0 2 1.2 2.7 3.6 3 .5.1 1.1.2 1.6.3 1.5.4 2.1.9 2.1 1.9s-.9 1.7-2.3 1.7c-1.6 0-2.2-.7-2.5-1.6 0-.2-.2-.3-.4-.3h-1c-.2 0-.4.2-.3.4.4 1.7 1.5 2.6 3.2 2.9V23c0 .2.2.4.4.4h1c.2 0 .4-.2.4-.4v-1.3c2-.3 3.3-1.5 3.3-3.2z" fill="white"/>
+                    </svg>
+                    Pay With USDC
+                </h3>
+                <p>Tired of SOL volatility eating into your launch? usd.fun lets you launch tokens by paying in USDC — stable, predictable, no surprises. Your launch cost stays the same whether SOL is at $20 or $200.</p>
             </div>
         </section>
 
         <section class="features">
             <div class="feature">
-                <div class="feature-icon">💸</div>
-                <h3>1% Transfer Fee</h3>
-                <p>50% to creator, 50% burned. Earn on every trade.</p>
+                <div class="feature-icon">💵</div>
+                <h3>USDC Payments</h3>
+                <p>Launch with stablecoins. No SOL price risk.</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <h3>Fixed Supply</h3>
-                <p>Mint authority burned. No inflation ever.</p>
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Launch</h3>
+                <p>Token live in seconds. No waiting.</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">📈</div>
@@ -799,9 +766,9 @@
                 <p>Fair launch with built-in price discovery.</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">🚀</div>
-                <h3>Auto-Migrate</h3>
-                <p>Graduates to Raydium at $69k mcap.</p>
+                <div class="feature-icon">🔒</div>
+                <h3>Fixed Supply</h3>
+                <p>1B tokens. Mint burned. No inflation.</p>
             </div>
         </section>
 
@@ -809,18 +776,18 @@
             <div class="form-section">
                 <div class="section-header">
                     <h2>// CREATE TOKEN</h2>
-                    <span class="badge">Token22</span>
+                    <span class="badge">USDC</span>
                 </div>
 
                 <form id="launchForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Token Name</label>
-                            <input type="text" id="tokenName" placeholder="Solana Doge" required>
+                            <input type="text" id="tokenName" placeholder="My Token" required>
                         </div>
                         <div class="form-group">
                             <label>Symbol</label>
-                            <input type="text" id="tokenSymbol" placeholder="SDOGE" maxlength="10" required>
+                            <input type="text" id="tokenSymbol" placeholder="TOKEN" maxlength="10" required>
                         </div>
                     </div>
 
@@ -840,8 +807,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Initial Buy (SOL)</label>
-                            <input type="number" id="initialBuy" placeholder="0.1" step="0.01" min="0">
+                            <label>Initial Buy (USDC)</label>
+                            <input type="number" id="initialBuy" placeholder="10" step="1" min="0">
                             <div style="color: var(--gray-400); font-size: 0.75rem; margin-top: 8px;">
                                 Optional: Buy tokens at launch
                             </div>
@@ -860,6 +827,11 @@
                     </div>
                 </form>
 
+                <div class="cost-info">
+                    <div class="cost">$5 USDC</div>
+                    <div class="cost-label">Launch Cost (fixed, no SOL needed)</div>
+                </div>
+
                 <button class="launch-btn" id="launchBtn" disabled>Connect Wallet to Launch</button>
                 <div id="statusMsg"></div>
             </div>
@@ -877,12 +849,12 @@
                                 <div class="label">Supply</div>
                             </div>
                             <div class="preview-stat">
-                                <div class="value">1%</div>
-                                <div class="label">Fee</div>
+                                <div class="value">USDC</div>
+                                <div class="label">Payment</div>
                             </div>
                             <div class="preview-stat">
-                                <div class="value">T22</div>
-                                <div class="label">Standard</div>
+                                <div class="value">$5</div>
+                                <div class="label">Cost</div>
                             </div>
                         </div>
                     </div>
@@ -900,16 +872,14 @@
         </section>
 
         <footer>
-            <p>Built with Token22 Extensions on Solana</p>
+            <p>Built on Solana. Powered by USDC.</p>
             <div class="footer-links">
-                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://github.com/ClawGrabSOL" target="_blank">GitHub</a>
                 <a href="https://twitter.com" target="_blank">Twitter</a>
-                <a href="https://docs.solana.com/developing/programming-model/tokens#token-2022" target="_blank">Docs</a>
             </div>
         </footer>
     </div>
 
-    <!-- Wallet Modal -->
     <div class="modal-overlay" id="walletModal">
         <div class="modal">
             <h3>Connect Wallet</h3>
@@ -930,12 +900,10 @@
     </div>
 
     <script>
-        // State
         let walletAddress = null;
         let walletProvider = null;
         let imageData = null;
 
-        // Elements
         const connectBtn = document.getElementById('connectBtn');
         const launchBtn = document.getElementById('launchBtn');
         const walletModal = document.getElementById('walletModal');
@@ -944,18 +912,15 @@
         const tokenImage = document.getElementById('tokenImage');
         const statusMsg = document.getElementById('statusMsg');
 
-        // Form inputs
         const tokenName = document.getElementById('tokenName');
         const tokenSymbol = document.getElementById('tokenSymbol');
         const tokenDesc = document.getElementById('tokenDesc');
 
-        // Preview elements
         const previewName = document.getElementById('previewName');
         const previewSymbol = document.getElementById('previewSymbol');
         const previewDesc = document.getElementById('previewDesc');
         const previewImage = document.getElementById('previewImage');
 
-        // Wallet Detection
         const getProvider = (wallet) => {
             if (wallet === 'phantom' && window.solana?.isPhantom) return window.solana;
             if (wallet === 'solflare' && window.solflare) return window.solflare;
@@ -963,10 +928,8 @@
             return null;
         };
 
-        // Connect Button
         connectBtn.addEventListener('click', () => {
             if (walletAddress) {
-                // Disconnect
                 if (walletProvider?.disconnect) walletProvider.disconnect();
                 walletAddress = null;
                 walletProvider = null;
@@ -984,7 +947,6 @@
             if (e.target === walletModal) walletModal.classList.remove('show');
         });
 
-        // Wallet Options
         document.querySelectorAll('.wallet-option').forEach(opt => {
             opt.addEventListener('click', async () => {
                 const wallet = opt.dataset.wallet;
@@ -1023,7 +985,6 @@
             });
         });
 
-        // Image Upload
         imageUpload.addEventListener('click', () => tokenImage.click());
         
         tokenImage.addEventListener('change', (e) => {
@@ -1043,7 +1004,6 @@
             reader.readAsDataURL(file);
         });
 
-        // Live Preview
         tokenName.addEventListener('input', e => {
             previewName.textContent = e.target.value || 'Your Token';
         });
@@ -1058,7 +1018,6 @@
             previewDesc.textContent = e.target.value || 'Token description will appear here...';
         });
 
-        // Launch
         launchBtn.addEventListener('click', async () => {
             if (!walletAddress) return showStatus('Connect wallet first', 'error');
 
@@ -1070,7 +1029,7 @@
             try {
                 launchBtn.disabled = true;
                 launchBtn.textContent = 'Creating...';
-                showStatus('Creating your Token22...', 'loading');
+                showStatus('Creating your token with USDC...', 'loading');
 
                 const res = await fetch('/api/launch', {
                     method: 'POST',
@@ -1083,7 +1042,8 @@
                         twitter: document.getElementById('tokenTwitter').value.trim(),
                         website: document.getElementById('tokenWebsite').value.trim(),
                         creator: walletAddress,
-                        initialBuy: parseFloat(document.getElementById('initialBuy').value) || 0
+                        initialBuy: parseFloat(document.getElementById('initialBuy').value) || 0,
+                        paymentToken: 'USDC'
                     })
                 });
 
@@ -1108,7 +1068,6 @@
             statusMsg.textContent = msg;
         }
 
-        // Fetch launches
         async function fetchLaunches() {
             try {
                 const res = await fetch('/api/launches');
@@ -1138,7 +1097,6 @@
             } catch (e) {}
         }
 
-        // Auto-connect on load
         window.addEventListener('load', async () => {
             if (window.solana?.isPhantom) {
                 try {
